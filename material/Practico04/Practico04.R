@@ -38,7 +38,10 @@ ggplot(DF, aes(x=interaction(SexParent, FoodTreatment), y=SiblingNegotiation/Bro
   theme(axis.title=element_text(size=18),
         axis.text=element_text(size=16))
 
+summaryBy(SiblingNegotiation~SexParent+FoodTreatment, data=DF, FUN=c(mean, sd))
+DF$Tasa = DF$SiblingNegotiation/DF$BroodSize
 summaryBy(Tasa~SexParent+FoodTreatment, data=DF, FUN=c(mean, sd))
+
 
 # variacion entre zonas: Nest
 ggplot(DF, aes(x=Nest, y=SiblingNegotiation/BroodSize)) + 
@@ -98,7 +101,7 @@ m12=brm(SiblingNegotiation~SexParent+FoodTreatment+offset(log(BroodSize))+(1|Nes
 
 # Resultados
 summary(m11)
-summmary(m12)
+summary(m12)
 
 # Sigamos con m11
 # Dist posteriores del modelo m11
