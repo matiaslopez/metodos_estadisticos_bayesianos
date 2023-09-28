@@ -210,20 +210,29 @@ ppc.mean=ppc_stat(y=DF.s$Totalcover,yrep=post.dist.m1,stat = "mean", binwidth = 
           xlab("Average Total Plant cover")+ 
           theme(axis.text = element_text(size=16),
                 axis.title=element_text(size=18),
-                legend.position = "none")
+                legend.position = "none") 
 ppc.interv=ppc_intervals(y=DF.s$Totalcover,yrep=post.dist.m1)+  
   xlab("data point")+ 
   scale_x_continuous(breaks=seq(from=1, to=nrow(DF.s), by=5))+
   theme(axis.text = element_text(size=16),
         axis.title=element_text(size=18),
         legend.position = "none")
-ppc_max_Prod=ppc_stat_grouped(y=DF.s$Totalcover,yrep=post.dist.m1, 
-                  group = DF.s$Prod,stat = "max",binwidth=0.005)+
-            xlab("Maximum Total Plant cover")+ 
+ppc_mean_Prod=ppc_stat_grouped(y=DF.s$Totalcover,yrep=post.dist.m1, 
+                  group = DF.s$Prod,stat = "mean",binwidth=0.005)+
+            xlab("Mean Plant cover")+ 
             theme(axis.text = element_text(size=14,angle=90, hjust=1),
                   axis.title=element_text(size=18),
                   strip.text=element_text(size=16),
-                  legend.position = "none")
+                  legend.position = "none") + xlim(0.43, 0.6)
+ppc_max_Prod=ppc_stat_grouped(y=DF.s$Totalcover,yrep=post.dist.m1, 
+                              group = DF.s$Prod,stat = "max",binwidth=0.005)+
+  xlab("Maximum Total Plant cover")+ 
+  theme(axis.text = element_text(size=14,angle=90, hjust=1),
+        axis.title=element_text(size=18),
+        strip.text=element_text(size=16),
+        legend.position = "none") + xlim(0.54, 0.78)
+
+
 plot_grid(ppc.density, ppc.interv, ppc.mean,ppc_max_Prod,  ncol=2,
           labels = LETTERS[1:4],align="hv",label_x=0.95, label_y=0.95) 
 
@@ -242,7 +251,8 @@ m1.Grazing.Prod=plot(m1.cond.eff, plot = F, points=T)[[5]]+
         legend.position = "none")
 m1.Patchsize.Prod=plot(m1.cond.eff, plot = F, points=T)[[6]]+
   theme_bw()+
-  labs(y="Total Plant cover",x="Patch.size (std)")+ 
+  labs(y="Total Plant cover",x="Patch.size (std)") +
+  # scale_fill_discrete(breaks=c('High', 'Medium', 'Low'))+ 
   theme(axis.text = element_text(size=16),
         axis.title.x =  element_text(size=18),
         axis.title.y =  element_blank(),

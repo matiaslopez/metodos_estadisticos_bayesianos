@@ -40,6 +40,7 @@ cdf.sleep=cdfcomp(list(norm,lognorm), main="", legendtext =c("Normal", "Lognorma
 qq.sleep=qqcomp(list(norm,lognorm), main="",fitcol = c("black","grey"), 
                 plotstyle ="ggplot")+
   geom_line(size=1.2)+theme_bw()+
+  geom_point(size=4, color="red")+
   theme(axis.title= element_text(size=18), 
         axis.text = element_text(size=16), 
         legend.position ="none")
